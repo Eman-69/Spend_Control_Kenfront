@@ -1,0 +1,144 @@
+<template>
+  <v-app class="background-main">
+    <v-layout>
+      <div class="nav"><Navbar @customEvent="handleCustomEvent" /></div>
+      <v-main>
+        <div fluid class="header-margin-top">
+          <slot />
+        </div>
+      </v-main>
+      <!-- nav -->
+      <v-navigation-drawer
+        theme="dark"
+        v-model="drawer"
+        temporary
+        location="right"
+      >
+        <v-list-item prepend-avatar="" title="SpendControl"></v-list-item>
+
+        <v-divider></v-divider>
+
+        <v-list density="comfortable" nav>
+          <NuxtLink class="text-decoration-none text-white" to="/">
+            <v-list-item
+              prepend-icon="mdi-view-dashboard"
+              title="Home"
+              value="to"
+            ></v-list-item
+          ></NuxtLink>
+            <NuxtLink class="text-decoration-none text-white" >
+                <v-list-item
+                  prepend-icon="mdi-information"
+                  title="About"
+                  value="to"
+              ></v-list-item
+              ></NuxtLink>
+          <NuxtLink class="text-decoration-none text-white" to="/casestudies">
+              <v-list-item
+                prepend-icon="mdi-book-multiple"
+                title="Case Studies"
+                value="to"
+              ></v-list-item
+            ></NuxtLink>
+            <NuxtLink class="text-decoration-none text-white" to="/blogs">
+              <v-list-item
+                prepend-icon="mdi-post"
+                title="Blogs"
+                value="to"
+              ></v-list-item
+            ></NuxtLink>
+          <!-- <v-list-group value="Services" prepend-icon="mdi-toolbox-outline">
+            <template v-slot:activator="{ props }">
+              <v-list-item v-bind="props" title="Services"></v-list-item>
+            </template>
+            <NuxtLink
+              class="text-decoration-none text-white"
+              v-for="([title, icon, to], i) in services"
+              :key="i"
+              :to="to"
+              :title="title"
+              :icon="icon"
+            >
+              <v-list-item prepend-icon="mdi-cog-outline">
+                {{ title }}</v-list-item
+              ></NuxtLink
+            >
+          </v-list-group>
+          <v-list-group value="Products" prepend-icon="mdi-package-variant">
+            <template v-slot:activator="{ props }">
+              <v-list-item v-bind="props" title="Products"></v-list-item>
+            </template>
+            <NuxtLink
+              class="text-decoration-none text-white"
+              v-for="([title, icon, to], i) in products"
+              :key="i"
+              :to="to"
+              :title="title"
+              :icon="icon"
+            >
+              <v-list-item prepend-icon="mdi-cog-outline">
+                {{ title }}</v-list-item
+              ></NuxtLink
+            >
+          </v-list-group>
+          <NuxtLink to="/" class="text-decoration-none text-white">
+            <v-list-item
+              prepend-icon="mdi-forum"
+              title="About Us"
+              value="about-us"
+            ></v-list-item>
+          </NuxtLink> -->
+          <NuxtLink class="text-decoration-none text-white">
+            <v-list-item
+              prepend-icon="mdi-email-outline"
+              title="Contact"
+              value="contact-us"
+            ></v-list-item>
+          </NuxtLink>
+        </v-list>
+      </v-navigation-drawer>
+    </v-layout>
+  </v-app>
+</template>
+
+<style scoped>
+.background-main {
+  background: url(/images/bgLayer2.png),url(/images/bgLayer1.png);
+  background-blend-mode: multiply;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 100% 100%;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+}
+</style>
+
+<script setup>
+let drawer = ref(null);
+let handleCustomEvent = async (dataFromChild) => {
+  console.log("Data from child:", dataFromChild);
+  drawer.value = dataFromChild;
+};
+</script>
+
+<script>
+export default {
+  data: () => ({
+    open: ["Users"],
+    services: [
+      [
+        "Data Science as a Service",
+        "mdi-cog-outline",
+        "/",
+      ],
+      ["IDEA", "mdi-cog-outline", "/"],
+      ["Incorta", "mdi-cog-outline", "/"],
+      ["Enterprises Analytics", "mdi-cog-outline", "/"],
+    ],
+    products: [
+      ["Carrom Live", "mdi-cog-outline", "/"],
+      ["Spend Control", "mdi-cog-outline", "/"],
+    ],
+  }),
+};
+</script>
